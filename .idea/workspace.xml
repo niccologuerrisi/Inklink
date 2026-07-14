@@ -4,20 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="021b5344-92ff-4282-bdf4-84be0d0dbe35" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/model/Purchase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/model/PurchaseStatus.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/model/Slot.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/model/SlotStatus.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/model/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+    <list default="true" id="021b5344-92ff-4282-bdf4-84be0d0dbe35" name="Changes" comment="Struttura base della piattaforma, assieme alle prime entità del backend">
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/model/Artwork.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/model/Message.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/styles.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/model/Purchase.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/model/Purchase.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,6 +62,7 @@
     "git-widget-placeholder": "copia",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/home/main/IdeaProjects/Inklink",
+    "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "SDKs",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
@@ -109,11 +101,24 @@
       <workItem from="1783371670273" duration="3230000" />
       <workItem from="1783374913853" duration="209000" />
       <workItem from="1783808623881" duration="2895000" />
-      <workItem from="1783895750968" duration="2826000" />
+      <workItem from="1783895750968" duration="5097000" />
     </task>
+    <task id="LOCAL-00001" summary="Struttura base della piattaforma, assieme alle prime entità del backend">
+      <option name="closed" value="true" />
+      <created>1783898735287</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1783898735287</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Struttura base della piattaforma, assieme alle prime entità del backend" />
+    <option name="LAST_COMMIT_MESSAGE" value="Struttura base della piattaforma, assieme alle prime entità del backend" />
   </component>
 </project>

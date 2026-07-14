@@ -2,6 +2,8 @@ package com.inklink.backend.model;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.ArrayList;
 
 @Data
 @Entity
@@ -29,4 +31,8 @@ public class Purchase
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private PurchaseStatus status = PurchaseStatus.PAID;
+
+    //serve per avere la chat dell'acquisto
+    @OneToMany(mappedBy = "purchase", cascade = CascadeType.ALL)
+    private List<Message> messages = new ArrayList<>();
 }
