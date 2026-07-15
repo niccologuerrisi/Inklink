@@ -5,18 +5,21 @@ import java.time.LocalDateTime;
 
 @Data
 @Entity
-@Table(name = "artworks")
-public class Artwork
+@Table(name = "reviews")
+public class Review
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private String fileUrl;
+    private Integer rating;
+
+    @Column(nullable = true)
+    private String comment;
 
     @Column(nullable = false, updatable = false)
-    private LocalDateTime uploadDate = LocalDateTime.now();
+    private LocalDateTime ratingDate = LocalDateTime.now();
 
     @ManyToOne
     @JoinColumn(name = "purchase_id", nullable = false)
