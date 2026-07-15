@@ -35,4 +35,12 @@ public class Purchase
     //serve per avere la chat dell'acquisto
     @OneToMany(mappedBy = "purchase", cascade = CascadeType.ALL)
     private List<Message> messages = new ArrayList<>();
+
+    //permette di accedere all'artwork da purchase
+    @OneToOne(mappedBy = "purchase", cascade = CascadeType.ALL)
+    private Artwork artwork;
+
+    //permette di avere il rating per l'artwork
+    @OneToOne(mappedBy = "purchase", cascade = CascadeType.ALL)
+    private Review review;
 }

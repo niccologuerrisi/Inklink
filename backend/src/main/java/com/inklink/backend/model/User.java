@@ -41,4 +41,9 @@ public class User
     //rappresenta i vari acquisti che un utente può aver fatto, dato che ne può fare diversi contemporaneamente
     @OneToMany(mappedBy = "buyer", cascade = CascadeType.ALL)
     private List<Purchase> purchases = new ArrayList<>();
+
+    //permette di visualizzare le immagini del portfolio, la relazione one to many permette di associare ad un solo utente più immagini
+    //contenute nel portfolio, in portfolioItem avremo invece la chiave esterna che associa l'oggetto al proprietario(many to one)
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
+    private List<PortfolioItem> portfolioItems = new ArrayList<>();
 }
