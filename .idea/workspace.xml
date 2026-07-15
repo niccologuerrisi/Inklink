@@ -4,20 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="021b5344-92ff-4282-bdf4-84be0d0dbe35" name="Changes" comment="Modifche + aggiunta di altre entità">
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/Repository/ArtworkRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/Repository/MessageRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/Repository/PortfolioItemRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/Repository/PurchaseRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/Repository/ReviewRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/Repository/SlotRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/Repository/UserRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/model/PortfolioItem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/model/Review.java" afterDir="false" />
+    <list default="true" id="021b5344-92ff-4282-bdf4-84be0d0dbe35" name="Changes" comment="Aggiunte le ultime entità e conclusi i collegamenti con quelle già esistenti; creazione delle interfacce repository con implementazione di jparepository">
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/Service/ArtworkService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/Service/MessageService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/Service/PortfolioItemService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/Service/PurchaseService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/Service/ReviewService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/Service/SlotService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/Service/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/model/Artwork.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/model/Artwork.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/model/Purchase.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/model/Purchase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/Repository/MessageRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/Repository/MessageRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/Repository/PortfolioItemRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/Repository/PortfolioItemRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/Repository/SlotRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/Repository/SlotRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/Repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/Repository/UserRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,7 +111,7 @@
       <workItem from="1783808623881" duration="2895000" />
       <workItem from="1783895750968" duration="5097000" />
       <workItem from="1784043066601" duration="3315000" />
-      <workItem from="1784102234352" duration="2847000" />
+      <workItem from="1784102234352" duration="16780000" />
     </task>
     <task id="LOCAL-00001" summary="Struttura base della piattaforma, assieme alle prime entità del backend">
       <option name="closed" value="true" />
@@ -130,7 +129,15 @@
       <option name="project" value="LOCAL" />
       <updated>1784043130767</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Aggiunte le ultime entità e conclusi i collegamenti con quelle già esistenti; creazione delle interfacce repository con implementazione di jparepository">
+      <option name="closed" value="true" />
+      <created>1784105187055</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1784105187055</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -139,6 +146,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Struttura base della piattaforma, assieme alle prime entità del backend" />
     <MESSAGE value="Modifche + aggiunta di altre entità" />
-    <option name="LAST_COMMIT_MESSAGE" value="Modifche + aggiunta di altre entità" />
+    <MESSAGE value="Aggiunte le ultime entità e conclusi i collegamenti con quelle già esistenti; creazione delle interfacce repository con implementazione di jparepository" />
+    <option name="LAST_COMMIT_MESSAGE" value="Aggiunte le ultime entità e conclusi i collegamenti con quelle già esistenti; creazione delle interfacce repository con implementazione di jparepository" />
   </component>
 </project>
