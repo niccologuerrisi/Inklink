@@ -4,6 +4,7 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.ArrayList;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Data
 @Entity
@@ -14,10 +15,12 @@ public class Purchase
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonIgnore
     @ManyToOne //Questo viene fatto quando colleghiamo un'entità, column solo per campi semplici
     @JoinColumn(name = "slot_id", nullable = false)
     private Slot slot;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "buyer_id", nullable = false)
     private User buyer;

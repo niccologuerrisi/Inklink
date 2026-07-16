@@ -57,4 +57,9 @@ public class PurchaseService
         slotRepository.save(slot);
         return repository.save(purchase);
     }
+
+    public Purchase getPurchaseById(Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Acquisto non trovato"));
+    }
 }

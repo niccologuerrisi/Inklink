@@ -34,6 +34,8 @@ public class UserService
     public void activateAsArtist(Long userId)
     {
         User user = getUserById(userId);
+        if (!user.getSlots().isEmpty())
+            throw new RuntimeException("Utente già attivo come artista");
         slotService.createDefaultSlots(user);
     }
 }
