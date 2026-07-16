@@ -1,6 +1,8 @@
 package com.inklink.backend.model;
 import jakarta.persistence.*;
 import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 @Data
 @Entity
@@ -21,6 +23,9 @@ public class Slot
     @Column(nullable = false)
     private SlotStatus status = SlotStatus.OPEN;
 
+    // senza JsonIgnore gli slot andranno a chiamare ricorsivamente l'artista, che è lo user,
+    // che avrà liste di slot che avranno artisti user, e così via
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "artist_id", nullable = false)
     private User artist;

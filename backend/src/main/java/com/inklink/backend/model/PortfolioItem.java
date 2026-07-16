@@ -2,6 +2,7 @@ package com.inklink.backend.model;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Data
 @Entity
@@ -24,6 +25,7 @@ public class PortfolioItem
     @Column(nullable = false, updatable = false)
     private LocalDateTime uploadDate = LocalDateTime.now();
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "owner_id", nullable = false)
     private User owner;

@@ -2,6 +2,7 @@ package com.inklink.backend.model;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Data
 @Entity
@@ -12,10 +13,12 @@ public class Message
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "purchase_id", nullable = false)
     private Purchase purchase;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "sender_id", nullable = false)
     private User sender;
