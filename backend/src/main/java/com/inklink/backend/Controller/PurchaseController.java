@@ -26,4 +26,7 @@ public class PurchaseController {
 
     @PostMapping("/{purchaseId}/complete")
     public Purchase completePurchase(@PathVariable Long purchaseId) {return service.completePurchase(purchaseId);}
+
+    @GetMapping("/{id}")
+    public Purchase getPurchase(@PathVariable Long id) {return service.getPurchaseById(id);}
 }
