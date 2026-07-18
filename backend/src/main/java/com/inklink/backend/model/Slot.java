@@ -29,4 +29,10 @@ public class Slot
     @ManyToOne
     @JoinColumn(name = "artist_id", nullable = false)
     private User artist;
+
+    // getter "piatto" che espone solo l'id dell'artista nel JSON, senza serializzare
+    // l'intero oggetto User (che è @JsonIgnore per evitare la ricorsione infinita)
+    public Long getArtistId() {
+        return artist != null ? artist.getId() : null;
+    }
 }

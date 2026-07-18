@@ -16,6 +16,11 @@ public class SlotController {
         this.service = service;
     }
 
+    @GetMapping("/{id}")
+    public Slot getSlot(@PathVariable Long id) {
+        return service.getSlotById(id);
+    }
+
     @GetMapping("/artist/{artistId}")
     public List<Slot> getSlotsByArtist(@PathVariable Long artistId) {
         return service.getSlotsByArtist(artistId);

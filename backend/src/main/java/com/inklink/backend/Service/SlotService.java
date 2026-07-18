@@ -25,6 +25,12 @@ public class SlotService
         }
     }
 
+    public Slot getSlotById(Long id)
+    {
+        return repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Slot non trovato"));
+    }
+
     public List<Slot> getSlotsByArtist(Long artistId) {return repository.findByArtistId(artistId);}
 
     public List<Slot> getSlotsByArtistAndStatus(Long artistId, SlotStatus status) {return repository.findByArtistIdAndStatus(artistId, status);}

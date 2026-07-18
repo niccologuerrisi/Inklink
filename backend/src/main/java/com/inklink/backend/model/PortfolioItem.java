@@ -29,4 +29,8 @@ public class PortfolioItem
     @ManyToOne
     @JoinColumn(name = "owner_id", nullable = false)
     private User owner;
+
+    public Long getOwnerId() {
+        return owner != null ? owner.getId() : null;
+    }
 }

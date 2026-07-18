@@ -28,4 +28,8 @@ public class Message
 
     @Column(nullable = false, updatable = false)
     private LocalDateTime messageDate = LocalDateTime.now();
+
+    public Long getSenderId() {
+        return sender != null ? sender.getId() : null;
+    }
 }
