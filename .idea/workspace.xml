@@ -4,54 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="021b5344-92ff-4282-bdf4-84be0d0dbe35" name="Changes" comment="auth service + login html e typescript">
+    <list default="true" id="021b5344-92ff-4282-bdf4-84be0d0dbe35" name="Changes" comment="principalmente parte grafica">
       <change afterPath="$PROJECT_DIR$/backend/request.http" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/Controller/SlotController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/Controller/SlotController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/Controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/Controller/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/Service/SlotService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/Service/SlotService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/Service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/Service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/model/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/model/Message.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/model/PortfolioItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/model/PortfolioItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/model/Purchase.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/model/Purchase.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/model/Slot.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/com/inklink/backend/model/Slot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.config.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.config.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.routes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.routes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/models/slot.model.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/models/slot.model.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/pages/artist-list/artist-list.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/pages/artist-list/artist-list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/pages/artist-list/artist-list.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/pages/artist-list/artist-list.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/pages/artist-list/artist-list.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/pages/artist-list/artist-list.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/pages/artist-list/artist-list.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/pages/artist-list/artist-list.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/pages/artist-profile/artist-profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/pages/artist-profile/artist-profile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/pages/artist-profile/artist-profile.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/pages/artist-profile/artist-profile.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/pages/artist-profile/artist-profile.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/pages/artist-profile/artist-profile.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/pages/artist-profile/artist-profile.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/pages/artist-profile/artist-profile.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/pages/home/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/pages/home/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/pages/home/home.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/pages/home/home.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/pages/home/home.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/pages/home/home.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/pages/home/home.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/pages/home/home.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/pages/login/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/pages/login/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/pages/login/login.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/pages/login/login.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/pages/login/login.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/pages/login/login.spec.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/pages/login/login.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/pages/login/login.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/pages/profile/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/pages/profile/profile.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/pages/profile/profile.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/pages/profile/profile.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/pages/profile/profile.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/pages/profile/profile.spec.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/pages/profile/profile.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/pages/profile/profile.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/pages/purchase-detail/purchase-detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/pages/purchase-detail/purchase-detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/pages/purchase-detail/purchase-detail.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/pages/purchase-detail/purchase-detail.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/pages/purchase-detail/purchase-detail.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/pages/purchase-detail/purchase-detail.spec.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/pages/purchase-detail/purchase-detail.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/pages/purchase-detail/purchase-detail.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/services/slot.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/services/slot.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/services/user.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/services/user.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/styles.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -213,6 +173,8 @@
       <workItem from="1784375976789" duration="51000" />
       <workItem from="1784386734760" duration="4311000" />
       <workItem from="1784394512332" duration="499000" />
+      <workItem from="1784395907609" duration="435000" />
+      <workItem from="1784396675056" duration="1214000" />
     </task>
     <task id="LOCAL-00001" summary="Struttura base della piattaforma, assieme alle prime entità del backend">
       <option name="closed" value="true" />
@@ -286,7 +248,15 @@
       <option name="project" value="LOCAL" />
       <updated>1784375889638</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="principalmente parte grafica">
+      <option name="closed" value="true" />
+      <created>1784396316030</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1784396316030</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -301,6 +271,7 @@
     <MESSAGE value="Sviluppo dei modelli typescript" />
     <MESSAGE value="Sviluppo dei servizi typescript con aggiunta di un metodo in PurchaseController.java" />
     <MESSAGE value="auth service + login html e typescript" />
-    <option name="LAST_COMMIT_MESSAGE" value="auth service + login html e typescript" />
+    <MESSAGE value="principalmente parte grafica" />
+    <option name="LAST_COMMIT_MESSAGE" value="principalmente parte grafica" />
   </component>
 </project>

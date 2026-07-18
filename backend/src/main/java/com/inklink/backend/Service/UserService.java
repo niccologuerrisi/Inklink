@@ -18,6 +18,13 @@ public class UserService
 
     public User registerUser(User newUser)
     {
+        if (newUser.getName() == null || newUser.getName().isBlank()
+                || newUser.getSurname() == null || newUser.getSurname().isBlank()
+                || newUser.getMail() == null || newUser.getMail().isBlank()
+                || newUser.getPassword() == null || newUser.getPassword().isBlank())
+        {
+            throw new RuntimeException("Nome, cognome, email e password sono obbligatori");
+        }
         if (repository.existsByMail(newUser.getMail())) {
             throw new RuntimeException("Email già registrata");
         }
@@ -30,7 +37,10 @@ public class UserService
                 .orElseThrow(() -> new RuntimeException("Utente non trovato"));
     }
 
-    public List<User> getAllUsers() {return repository.findAll();}
+    public List<User> getAllUsers()
+    {
+        return repository.findAll();
+    }
 
     //quando un utente che originariamente era un no artista decide di diventare artista
     //il suo profilo verrà cambiato come artista e gli slot diventeranno disponibili
