@@ -3,6 +3,7 @@ package com.inklink.backend.controller;
 import com.inklink.backend.model.User;
 import com.inklink.backend.service.UserService;
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
@@ -16,6 +17,11 @@ public class UserController
     @PostMapping //rispone alle richieste HTTP di tipo POST sull'URL base
     public User registerUser(@RequestBody User user) {
         return service.registerUser(user);
+    }
+
+    @GetMapping
+    public List<User> getAllUsers() {
+        return service.getAllUsers();
     }
     //@RequestBody User user dice a Spring di prendere il file JSON che arriva nel corpo
     //della richiesta e di convertirlo in un oggetto user

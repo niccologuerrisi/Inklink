@@ -46,4 +46,14 @@ public class Purchase
     //permette di avere il rating per l'artwork
     @OneToOne(mappedBy = "purchase", cascade = CascadeType.ALL)
     private Review review;
+
+    // getter "piatti" per esporre gli id di slot e acquirente nel JSON,
+    // dato che i campi "slot" e "buyer" sono @JsonIgnore per evitare la ricorsione
+    public Long getSlotId() {
+        return slot != null ? slot.getId() : null;
+    }
+
+    public Long getBuyerId() {
+        return buyer != null ? buyer.getId() : null;
+    }
 }
