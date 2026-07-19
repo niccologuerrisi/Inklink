@@ -1,0 +1,108 @@
+.hero {
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--ink-border);
+  animation: hero-in 0.5s ease both;
+}
+
+@keyframes hero-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero__blot {
+  position: absolute;
+  z-index: 0;
+}
+
+.hero__blot--a {
+  width: min(30rem, 60vw);
+  top: -6rem;
+  right: -6rem;
+}
+
+.hero__blot--b {
+  width: min(20rem, 40vw);
+  bottom: -5rem;
+  left: -4rem;
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+  padding-top: 4rem;
+  padding-bottom: 4.5rem;
+  max-width: 640px;
+}
+
+.hero__title {
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  letter-spacing: -0.01em;
+}
+
+.hero__subtitle {
+  font-size: 1.05rem;
+  color: var(--ink-text-muted);
+  max-width: 46ch;
+}
+
+.hero__actions {
+  display: flex;
+  gap: 0.9rem;
+  margin-top: 1.75rem;
+  flex-wrap: wrap;
+}
+
+.featured h2,
+.how h2 {
+  margin-bottom: 1.5rem;
+}
+
+.featured__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 1.25rem;
+}
+
+.how {
+  border-top: 1px solid var(--ink-border);
+  padding-top: 3rem;
+}
+
+.how__steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+
+  li {
+    display: flex;
+    gap: 1rem;
+  }
+
+  h3 {
+    font-size: 1.05rem;
+    margin-bottom: 0.35rem;
+  }
+
+  p {
+    color: var(--ink-text-muted);
+    font-size: 0.9rem;
+  }
+}
+
+.how__number {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--ink-accent-b);
+  font-weight: 600;
+  flex-shrink: 0;
+}

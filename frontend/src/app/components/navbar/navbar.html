@@ -1,0 +1,28 @@
+<header class="nav">
+  <a class="nav__brand" routerLink="/">
+    <span class="nav__brand-mark">Ink</span><span class="nav__brand-mark nav__brand-mark--accent">link</span>
+  </a>
+
+  <nav class="nav__links">
+    <a routerLink="/" routerLinkActive="is-active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+    <a routerLink="/artists" routerLinkActive="is-active">Artisti</a>
+  </nav>
+
+  <div class="nav__actions">
+    <button
+      type="button"
+      class="nav__icon-btn"
+      (click)="theme.toggle()"
+      [attr.aria-label]="theme.theme() === 'light' ? 'Attiva tema scuro' : 'Attiva tema chiaro'"
+    >
+      <mat-icon>{{ theme.theme() === 'light' ? 'dark_mode' : 'light_mode' }}</mat-icon>
+    </button>
+
+    @if (auth.currentUserId()) {
+      <a class="nav__link-btn" routerLink="/profile" routerLinkActive="is-active">Il mio profilo</a>
+      <button type="button" class="nav__link-btn nav__link-btn--ghost" (click)="logout()">Esci</button>
+    } @else {
+      <a class="nav__link-btn nav__link-btn--primary" routerLink="/login">Accedi</a>
+    }
+  </div>
+</header>

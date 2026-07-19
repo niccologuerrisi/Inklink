@@ -1,0 +1,130 @@
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--ink-border);
+  background: var(--ink-bg);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.nav__brand {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-decoration: none;
+  color: var(--ink-text-strong);
+  letter-spacing: -0.01em;
+}
+
+.nav__brand-mark--accent {
+  color: var(--ink-accent-b);
+}
+
+.nav__links {
+  display: flex;
+  gap: 1.25rem;
+  flex: 1;
+
+  a {
+    color: var(--ink-text-muted);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.92rem;
+    padding: 0.4rem 0.2rem;
+    border-bottom: 2px solid transparent;
+    transition: color 0.15s ease, border-color 0.15s ease;
+
+    &:hover {
+      color: var(--ink-text-strong);
+    }
+
+    &.is-active {
+      color: var(--ink-text-strong);
+      border-bottom-color: var(--ink-accent-b);
+    }
+  }
+}
+
+.nav__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.nav__icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 999px;
+  border: 1px solid var(--ink-border);
+  background: transparent;
+  color: var(--ink-text);
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.15s ease;
+
+  &:hover {
+    background: var(--ink-surface);
+  }
+
+  &:active {
+    transform: scale(0.94);
+  }
+
+  mat-icon {
+    font-size: 1.15rem;
+    width: 1.15rem;
+    height: 1.15rem;
+  }
+}
+
+.nav__link-btn {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.88rem;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--ink-text);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+
+  &:hover {
+    background: var(--ink-surface);
+  }
+
+  &--primary {
+    background: var(--ink-action);
+    color: var(--ink-on-action);
+
+    &:hover {
+      background: var(--ink-action-hover);
+    }
+  }
+
+  &--ghost {
+    border-color: var(--ink-border);
+  }
+
+  &.is-active {
+    border-color: var(--ink-border-strong);
+  }
+}
+
+@media (max-width: 640px) {
+  .nav {
+    flex-wrap: wrap;
+  }
+
+  .nav__links {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+  }
+}
