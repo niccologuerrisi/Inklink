@@ -15,6 +15,13 @@ public class MessageService
     public MessageService(MessageRepository repository) {this.repository = repository;}
 
     public Message sendMessage(Purchase purchase, User sender, String text) {
+        boolean isBuyer = purchase.getBuyer().getId().equals(sender.getId());
+        boolean isArtist = purchase.getSlot().getArtist().getId().equals(sender.getId());
+
+        if (!isBuyer && !isArtist) {
+            throw new RuntimeException("Non puoi scrivere in una conversazione che non ti riguarda");
+        }
+
         Message message = new Message();
         message.setPurchase(purchase);
         message.setSender(sender);

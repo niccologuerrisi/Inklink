@@ -1,7 +1,7 @@
 package com.inklink.backend.controller;
-
 import com.inklink.backend.model.User;
 import com.inklink.backend.service.UserService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -31,8 +31,10 @@ public class UserController
         return service.getUserById(id);
     }
 
-    @PostMapping("/{id}/activate-artist")
-    public void activateArtist(@PathVariable Long id) {
-        service.activateAsArtist(id);
+    @PostMapping("/activate-artist")
+    public void activateArtist() {
+        String mail = SecurityContextHolder.getContext().getAuthentication().getName();
+        User user = service.getUserByMail(mail);
+        service.activateAsArtist(user.getId());
     }
 }

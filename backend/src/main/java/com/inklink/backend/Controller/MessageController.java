@@ -8,6 +8,7 @@ import com.inklink.backend.service.PurchaseService;
 import com.inklink.backend.service.UserService;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 @RestController
 @RequestMapping("/api/messages")
@@ -24,11 +25,11 @@ public class MessageController {
     }
 
     @PostMapping("/send")
-    public Message sendMessage(@RequestParam Long purchaseId, @RequestParam Long senderId, @RequestParam String text)
-    {
+    public Message sendMessage(@RequestParam Long purchaseId, @RequestParam String text) {
+        String mail = SecurityContextHolder.getContext().getAuthentication().getName();
+        User sender = userService.getUserByMail(mail);
         Purchase purchase = purchaseService.getPurchaseById(purchaseId);
-        User user = userService.getUserById(senderId);
-        return service.sendMessage(purchase, user, text);
+        return service.sendMessage(purchase, sender, text);
     }
 
     @GetMapping("/purchase/{purchaseId}")
