@@ -1,0 +1,329 @@
+// ---------------------------------------------------------------------------
+// Inklink — sistema di stile globale
+// ---------------------------------------------------------------------------
+// Angular Material fornisce lo "scheletro" dei componenti (bottoni, campi,
+// card); i colori reali sono guidati dalle variabili CSS definite qui sotto,
+// che vengono sovrascritte in base all'attributo [data-theme] impostato da
+// ThemeService su <html>. Così un solo toggle cambia contemporaneamente sia
+// i componenti Material sia tutto il resto dell'interfaccia.
+@use '@angular/material' as mat;
+
+html {
+  height: 100%;
+  @include mat.theme(
+    (
+      color: (
+        primary: mat.$violet-palette,
+        tertiary: mat.$green-palette,
+      ),
+      typography: (
+        plain-family: 'Manrope',
+        brand-family: 'Fraunces',
+      ),
+      density: 0,
+    )
+  );
+}
+
+// ---------------------------------------------------------------------------
+// Token di tema
+// ---------------------------------------------------------------------------
+:root {
+  // tipografia
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'SFMono-Regular', Menlo, monospace;
+
+  // superfici e testo — tema chiaro (default): sfondo bianco, testo blu
+  --ink-bg: #ffffff;
+  --ink-surface: #f7f7fc;
+  --ink-surface-raised: #ffffff;
+  --ink-text: #161b3d;
+  --ink-text-strong: #0a0e26;
+  --ink-text-muted: #4d5583;
+  --ink-border: rgba(22, 27, 61, 0.12);
+  --ink-border-strong: rgba(22, 27, 61, 0.22);
+
+  // le due "macchie di vernice" del tema chiaro
+  --ink-accent-a: #1f8a55; // verde
+  --ink-accent-b: #7a3fe0; // viola
+  --ink-accent-a-soft: rgba(31, 138, 85, 0.14);
+  --ink-accent-b-soft: rgba(122, 63, 224, 0.14);
+
+  // azioni primarie / link
+  --ink-action: #3350e0;
+  --ink-action-hover: #2740b8;
+  --ink-on-action: #ffffff;
+
+  // stato
+  --ink-success: #1f8a55;
+  --ink-danger: #c62839;
+  --ink-danger-soft: rgba(198, 40, 57, 0.1);
+
+  --ink-shadow: 0 12px 32px rgba(22, 27, 61, 0.08);
+  --ink-radius: 14px;
+  --ink-radius-sm: 8px;
+}
+
+:root[data-theme='dark'] {
+  --ink-bg: #0a0a10;
+  --ink-surface: #131320;
+  --ink-surface-raised: #191927;
+  --ink-text: #dde5ff;
+  --ink-text-strong: #f6f8ff;
+  --ink-text-muted: #9aa3d6;
+  --ink-border: rgba(221, 229, 255, 0.14);
+  --ink-border-strong: rgba(221, 229, 255, 0.26);
+
+  // le due "macchie di vernice" del tema scuro
+  --ink-accent-a: #ff4d63; // rosso
+  --ink-accent-b: #4c8dff; // blu
+  --ink-accent-a-soft: rgba(255, 77, 99, 0.16);
+  --ink-accent-b-soft: rgba(76, 141, 255, 0.16);
+
+  --ink-action: #6f8dff;
+  --ink-action-hover: #8fa4ff;
+  --ink-on-action: #0a0e26;
+
+  --ink-success: #4fd18b;
+  --ink-danger: #ff6b7a;
+  --ink-danger-soft: rgba(255, 107, 122, 0.14);
+
+  --ink-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+}
+
+// ---------------------------------------------------------------------------
+// Riallineamento delle variabili di sistema di Angular Material ai token
+// sopra, così i componenti mat-* seguono automaticamente il tema Inklink.
+// ---------------------------------------------------------------------------
+html {
+  --mat-sys-surface: var(--ink-bg);
+  --mat-sys-on-surface: var(--ink-text);
+  --mat-sys-surface-container: var(--ink-surface);
+  --mat-sys-surface-container-high: var(--ink-surface-raised);
+  --mat-sys-primary: var(--ink-action);
+  --mat-sys-on-primary: var(--ink-on-action);
+  --mat-sys-outline: var(--ink-border-strong);
+  --mat-sys-outline-variant: var(--ink-border);
+  --mat-sys-body-medium: 400 0.95rem/1.5 var(--font-body);
+  --mat-sys-title-medium: 600 1.05rem/1.4 var(--font-body);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  color-scheme: light;
+  background-color: var(--ink-bg);
+  color: var(--ink-text);
+  font-family: var(--font-body);
+  margin: 0;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+:root[data-theme='dark'] body {
+  color-scheme: dark;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  color: var(--ink-text-strong);
+  font-weight: 600;
+  line-height: 1.15;
+  margin: 0 0 0.6em;
+}
+
+p {
+  margin: 0 0 1em;
+  color: var(--ink-text);
+}
+
+a {
+  color: var(--ink-action);
+}
+
+::selection {
+  background: var(--ink-accent-b-soft);
+}
+
+// ---------------------------------------------------------------------------
+// Utility condivise
+// ---------------------------------------------------------------------------
+
+// dati "da registro": prezzi, date, stati — sempre in monospace, per
+// distinguere visivamente il contenuto transazionale da quello editoriale
+.ink-ledger {
+  font-family: var(--font-mono);
+  letter-spacing: 0.02em;
+}
+
+.ink-page {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+}
+
+.ink-page--narrow {
+  max-width: 720px;
+}
+
+.ink-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-text-muted);
+  margin: 0 0 0.5rem;
+}
+
+.ink-card {
+  background: var(--ink-surface);
+  border: 1px solid var(--ink-border);
+  border-radius: var(--ink-radius);
+  padding: 1.5rem;
+}
+
+.ink-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.3em 0.7em;
+  border-radius: 999px;
+  border: 1px solid var(--ink-border-strong);
+  color: var(--ink-text-muted);
+}
+
+.ink-status--open {
+  color: var(--ink-success);
+  border-color: color-mix(in srgb, var(--ink-success) 45%, transparent);
+  background: color-mix(in srgb, var(--ink-success) 10%, transparent);
+}
+
+.ink-status--occupied,
+.ink-status--paid {
+  color: var(--ink-accent-b);
+  border-color: color-mix(in srgb, var(--ink-accent-b) 45%, transparent);
+  background: var(--ink-accent-b-soft);
+}
+
+.ink-status--delivered {
+  color: var(--ink-accent-a);
+  border-color: color-mix(in srgb, var(--ink-accent-a) 45%, transparent);
+  background: var(--ink-accent-a-soft);
+}
+
+.ink-status--completed {
+  color: var(--ink-success);
+  border-color: color-mix(in srgb, var(--ink-success) 45%, transparent);
+  background: color-mix(in srgb, var(--ink-success) 12%, transparent);
+}
+
+.ink-error {
+  color: var(--ink-danger);
+  background: var(--ink-danger-soft);
+  border: 1px solid color-mix(in srgb, var(--ink-danger) 35%, transparent);
+  border-radius: var(--ink-radius-sm);
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+}
+
+.ink-empty {
+  color: var(--ink-text-muted);
+  border: 1px dashed var(--ink-border-strong);
+  border-radius: var(--ink-radius);
+  padding: 2rem;
+  text-align: center;
+}
+
+.ink-blot {
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+}
+
+// ---------------------------------------------------------------------------
+// Bottoni condivisi
+// ---------------------------------------------------------------------------
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.92rem;
+  padding: 0.75em 1.4em;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.btn--primary {
+  background: var(--ink-action);
+  color: var(--ink-on-action);
+
+  &:hover:not(:disabled) {
+    background: var(--ink-action-hover);
+  }
+}
+
+.btn--ghost {
+  background: transparent;
+  border-color: var(--ink-border-strong);
+  color: var(--ink-text);
+
+  &:hover:not(:disabled) {
+    background: var(--ink-surface);
+  }
+}
+
+.btn--danger {
+  background: transparent;
+  border-color: color-mix(in srgb, var(--ink-danger) 45%, transparent);
+  color: var(--ink-danger);
+
+  &:hover:not(:disabled) {
+    background: var(--ink-danger-soft);
+  }
+}
+
+.btn--sm {
+  padding: 0.5em 1em;
+  font-size: 0.82rem;
+}
+
+.btn--block {
+  width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

@@ -1,0 +1,26 @@
+<div class="ink-page">
+  <p class="ink-eyebrow">Trova il tuo artista</p>
+  <h1>Artisti su Inklink</h1>
+
+  <input
+    type="search"
+    class="search-input"
+    placeholder="Cerca per nome o descrizione…"
+    [(ngModel)]="query"
+    name="query"
+  >
+
+  @if (loading()) {
+    <p class="ink-eyebrow">Caricamento…</p>
+  } @else if (errorMessage()) {
+    <p class="ink-error">{{ errorMessage() }}</p>
+  } @else if (filteredArtists().length === 0) {
+    <div class="ink-empty">Nessun artista corrisponde alla ricerca.</div>
+  } @else {
+    <div class="artist-grid">
+      @for (artist of filteredArtists(); track artist.id) {
+        <app-artist-card [user]="artist" />
+      }
+    </div>
+  }
+</div>

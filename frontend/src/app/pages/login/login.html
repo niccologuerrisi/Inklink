@@ -1,0 +1,63 @@
+<div class="ink-page ink-page--narrow auth">
+  <p class="ink-eyebrow">Benvenuto su Inklink</p>
+  <h1>{{ mode() === 'register' ? 'Crea il tuo account' : 'Accedi al tuo account' }}</h1>
+
+  <div class="auth__tabs" role="tablist">
+    <button type="button" role="tab" [class.is-active]="mode() === 'register'" (click)="setMode('register')">
+      Registrati
+    </button>
+    <button type="button" role="tab" [class.is-active]="mode() === 'access'" (click)="setMode('access')">
+      Ho già un account
+    </button>
+  </div>
+
+  @if (errorMessage()) {
+    <p class="ink-error">{{ errorMessage() }}</p>
+  }
+
+  @if (mode() === 'register') {
+    <form class="auth__form" (ngSubmit)="register()">
+      <div class="auth__row">
+        <mat-form-field appearance="outline">
+          <mat-label>Nome</mat-label>
+          <input matInput [(ngModel)]="newUser.name" name="name" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Cognome</mat-label>
+          <input matInput [(ngModel)]="newUser.surname" name="surname" required>
+        </mat-form-field>
+      </div>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" [(ngModel)]="newUser.mail" name="mail" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" [(ngModel)]="newUser.password" name="password" required>
+      </mat-form-field>
+
+      <button class="btn btn--primary btn--block" type="submit" [disabled]="submitting()">
+        {{ submitting() ? 'Creazione account…' : 'Crea account' }}
+      </button>
+    </form>
+  } @else {
+    <form class="auth__form" (ngSubmit)="accessWithPassword()">
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" [(ngModel)]="accessMail" name="accessMail" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" [(ngModel)]="accessPassword" name="accessPassword" required>
+      </mat-form-field>
+
+      <button class="btn btn--primary btn--block" type="submit" [disabled]="submitting()">
+        {{ submitting() ? 'Accesso in corso…' : 'Entra' }}
+      </button>
+    </form>
+  }
+</div>

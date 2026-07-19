@@ -1,0 +1,135 @@
+@if (loading()) {
+  <div class="ink-page"><p class="ink-eyebrow">Caricamento…</p></div>
+} @else if (!purchase() || !slot()) {
+  <div class="ink-page"><p class="ink-error">{{ errorMessage() || 'Commissione non trovata.' }}</p></div>
+} @else if (!hasAccess()) {
+  <div class="ink-page"><p class="ink-error">Non hai accesso a questa commissione.</p></div>
+} @else {
+  <div class="ink-page purchase">
+
+    <header class="purchase__header">
+      <div>
+        <p class="ink-eyebrow">Commissione #{{ purchase()!.id }}</p>
+        <h1>{{ slot()!.title }}</h1>
+        <p class="purchase__meta ink-ledger">
+          € {{ purchase()!.paidPrice }} · acquistata il {{ purchase()!.purchaseDate | slice:0:10 }}
+        </p>
+      </div>
+      <a routerLink="/profile" class="btn btn--ghost btn--sm">← Torna al profilo</a>
+    </header>
+
+    @if (errorMessage()) {
+      <p class="ink-error">{{ errorMessage() }}</p>
+    }
+
+    <ol class="stepper">
+      <li [class.is-done]="true">Pagato</li>
+      <li [class.is-done]="purchase()!.status === PurchaseStatus.DELIVERED || purchase()!.status === PurchaseStatus.COMPLETED">Consegnato</li>
+      <li [class.is-done]="purchase()!.status === PurchaseStatus.COMPLETED">Completato</li>
+    </ol>
+
+    <div class="purchase__grid">
+      <div class="purchase__main">
+
+        <section class="ink-card">
+          <h2>Consegna</h2>
+
+          @if (purchase()!.artwork) {
+            <a class="artwork-link" [href]="purchase()!.artwork!.fileUrl" target="_blank" rel="noopener">
+              Apri il file consegnato ↗
+            </a>
+            <p class="purchase__hint">
+              Caricato il {{ purchase()!.artwork!.uploadDate | slice:0:10 }}
+            </p>
+          } @else {
+            <p class="purchase__hint">L'artista non ha ancora caricato il lavoro finale.</p>
+          }
+
+          @if (isArtist() && purchase()!.status === PurchaseStatus.PAID) {
+            <form class="artwork-form" (ngSubmit)="uploadArtwork()">
+              <input
+                type="text"
+                placeholder="URL del file da consegnare"
+                [(ngModel)]="newArtworkUrl"
+                name="artworkUrl"
+                required
+              >
+              <button class="btn btn--primary" type="submit" [disabled]="uploadingArtwork() || !newArtworkUrl.trim()">
+                {{ uploadingArtwork() ? 'Carico…' : 'Consegna il lavoro' }}
+              </button>
+            </form>
+          }
+
+          @if (isBuyer() && purchase()!.status === PurchaseStatus.DELIVERED) {
+            <button class="btn btn--primary" (click)="completePurchase()" [disabled]="completing()">
+              {{ completing() ? 'Conferma…' : 'Conferma ricezione e completa' }}
+            </button>
+          }
+        </section>
+
+        @if (isBuyer() && purchase()!.status === PurchaseStatus.COMPLETED) {
+          <section class="ink-card">
+            <h2>La tua recensione</h2>
+
+            @if (purchase()!.review) {
+              <p class="review__stars">{{ '★'.repeat(purchase()!.review!.rating) }}{{ '☆'.repeat(5 - purchase()!.review!.rating) }}</p>
+              @if (purchase()!.review!.comment) {
+                <p>{{ purchase()!.review!.comment }}</p>
+              }
+            } @else {
+              <form class="review-form" (ngSubmit)="submitReview()">
+                <label>
+                  Voto
+                  <select [(ngModel)]="reviewRating" name="rating">
+                    <option [value]="5">5 — Eccellente</option>
+                    <option [value]="4">4 — Molto buono</option>
+                    <option [value]="3">3 — Buono</option>
+                    <option [value]="2">2 — Sufficiente</option>
+                    <option [value]="1">1 — Insufficiente</option>
+                  </select>
+                </label>
+                <textarea
+                  placeholder="Racconta la tua esperienza (facoltativo)"
+                  [(ngModel)]="reviewComment"
+                  name="comment"
+                  rows="3"
+                ></textarea>
+                <button class="btn btn--primary" type="submit" [disabled]="submittingReview()">
+                  {{ submittingReview() ? 'Invio…' : 'Invia recensione' }}
+                </button>
+              </form>
+            }
+          </section>
+        }
+      </div>
+
+      <aside class="ink-card purchase__chat">
+        <h2>Conversazione</h2>
+
+        <div class="chat__messages">
+          @if (messages().length === 0) {
+            <p class="purchase__hint">Nessun messaggio ancora: scrivete per accordarvi sui dettagli.</p>
+          }
+          @for (message of messages(); track message.id) {
+            <div class="chat__bubble" [class.chat__bubble--mine]="message.senderId === currentUserId()">
+              <p>{{ message.text }}</p>
+              <span class="chat__time ink-ledger">{{ message.messageDate | slice:11:16 }}</span>
+            </div>
+          }
+        </div>
+
+        <form class="chat__form" (ngSubmit)="sendMessage()">
+          <input
+            type="text"
+            placeholder="Scrivi un messaggio…"
+            [(ngModel)]="newMessageText"
+            name="messageText"
+          >
+          <button class="btn btn--primary btn--sm" type="submit" [disabled]="sendingMessage() || !newMessageText.trim()">
+            Invia
+          </button>
+        </form>
+      </aside>
+    </div>
+  </div>
+}

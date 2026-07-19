@@ -5,6 +5,7 @@ import com.inklink.backend.model.User;
 import com.inklink.backend.service.PurchaseService;
 import com.inklink.backend.service.UserService;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 @RestController
 @RequestMapping("/api/purchases")
@@ -19,8 +20,9 @@ public class PurchaseController {
     }
 
     @PostMapping("/buy")
-    public Purchase buySlot(@RequestParam Long slotId, @RequestParam Long buyerId) {
-        User buyer = userService.getUserById(buyerId);
+    public Purchase buySlot(@RequestParam Long slotId) {
+        String mail = SecurityContextHolder.getContext().getAuthentication().getName();
+        User buyer = userService.getUserByMail(mail);
         return service.buySlot(slotId, buyer);
     }
 

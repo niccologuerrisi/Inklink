@@ -4,6 +4,7 @@ import lombok.Data;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.ArrayList;
+import lombok.ToString;
 
 @Data //genera getter e setter e toString automaticamente
 @Entity
@@ -35,15 +36,18 @@ public class User
     @Column(nullable = false, updatable = false) //updatable impedisce che, una volta impostata la data per la prima volta, essa non potrà essere più modificata
     private LocalDateTime registrationDate = LocalDateTime.now(); //now() salava la data al momento della registrazione
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "artist", cascade = CascadeType.ALL)
     private List<Slot> slots = new ArrayList<>();
 
     //rappresenta i vari acquisti che un utente può aver fatto, dato che ne può fare diversi contemporaneamente
+    @ToString.Exclude
     @OneToMany(mappedBy = "buyer", cascade = CascadeType.ALL)
     private List<Purchase> purchases = new ArrayList<>();
 
     //permette di visualizzare le immagini del portfolio, la relazione one to many permette di associare ad un solo utente più immagini
     //contenute nel portfolio, in portfolioItem avremo invece la chiave esterna che associa l'oggetto al proprietario(many to one)
+    @ToString.Exclude
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL)
     private List<PortfolioItem> portfolioItems = new ArrayList<>();
 }

@@ -1,0 +1,139 @@
+@if (loading()) {
+  <div class="ink-page"><p class="ink-eyebrow">Caricamento profilo…</p></div>
+} @else if (!user()) {
+  <div class="ink-page"><p class="ink-error">Profilo non trovato.</p></div>
+} @else {
+  <div class="ink-page profile">
+
+    @if (errorMessage()) {
+      <p class="ink-error">{{ errorMessage() }}</p>
+    }
+
+    <header class="profile__header">
+      <div class="profile__avatar">{{ user()!.name[0] }}{{ user()!.surname[0] }}</div>
+      <div>
+        <p class="ink-eyebrow">Il tuo profilo</p>
+        <h1>{{ user()!.name }} {{ user()!.surname }}</h1>
+        <p class="profile__mail">{{ user()!.mail }}</p>
+        @if (user()!.bio) {
+          <p class="profile__bio">{{ user()!.bio }}</p>
+        }
+      </div>
+    </header>
+
+    <section class="profile__section">
+      <h2>Come artista</h2>
+
+      @if (!isArtist()) {
+        <div class="ink-empty">
+          <p>Non hai ancora attivato il tuo profilo artista.</p>
+          <button class="btn btn--primary" (click)="becomeArtist()" [disabled]="activating()">
+            {{ activating() ? 'Attivazione…' : 'Diventa artista' }}
+          </button>
+        </div>
+      } @else {
+        <div class="slots">
+          @for (slot of user()!.slots; track slot.id) {
+            <div class="ink-card slot-card">
+              <div class="slot-card__head">
+                <h3>{{ slot.title }}</h3>
+                <span
+                  class="ink-status"
+                  [class.ink-status--open]="slot.status === 'OPEN'"
+                  [class.ink-status--occupied]="slot.status === 'OCCUPIED'"
+                >{{ slot.status === 'OPEN' ? 'libero' : 'occupato' }}</span>
+              </div>
+
+              <label class="slot-card__price-label">
+                Prezzo (€)
+                <div class="slot-card__price-row">
+                  <input
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    class="slot-card__price-input ink-ledger"
+                    [(ngModel)]="priceDrafts[slot.id]"
+                  >
+                  <button
+                    class="btn btn--ghost btn--sm"
+                    (click)="savePrice(slot)"
+                    [disabled]="savingSlotId() === slot.id || priceDrafts[slot.id] === slot.price"
+                  >
+                    {{ savingSlotId() === slot.id ? 'Salvo…' : 'Salva' }}
+                  </button>
+                </div>
+              </label>
+
+              @if (slot.status === 'OCCUPIED') {
+                <p class="slot-card__hint">Occupato da una commissione in corso.</p>
+              }
+            </div>
+          }
+        </div>
+
+        <h2 class="profile__portfolio-title">Il tuo portfolio</h2>
+
+        @if ((user()!.portfolioItems?.length ?? 0) === 0) {
+          <p class="profile__muted">Non hai ancora aggiunto nessuna opera al portfolio.</p>
+        } @else {
+          <div class="portfolio-grid">
+            @for (item of user()!.portfolioItems; track item.id) {
+              <figure class="portfolio-grid__item">
+                <img [src]="item.fileURL" [alt]="item.title ?? 'Opera del portfolio'">
+                @if (item.title) {
+                  <figcaption>{{ item.title }}</figcaption>
+                }
+              </figure>
+            }
+          </div>
+        }
+
+        <form class="portfolio-form" (ngSubmit)="addPortfolioItem()">
+          <mat-form-field appearance="outline">
+            <mat-label>URL dell'immagine</mat-label>
+            <input matInput [(ngModel)]="newPortfolioItem.fileURL" name="fileURL" required>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Titolo (facoltativo)</mat-label>
+            <input matInput [(ngModel)]="newPortfolioItem.title" name="title">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Descrizione (facoltativa)</mat-label>
+            <input matInput [(ngModel)]="newPortfolioItem.description" name="description">
+          </mat-form-field>
+          <button class="btn btn--ghost" type="submit" [disabled]="addingPortfolioItem() || !newPortfolioItem.fileURL">
+            {{ addingPortfolioItem() ? 'Aggiungo…' : 'Aggiungi al portfolio' }}
+          </button>
+        </form>
+      }
+    </section>
+
+    <section class="profile__section">
+      <h2>I tuoi acquisti</h2>
+
+      @if (activePurchases().length === 0) {
+        <p class="profile__muted">Non hai ancora commissionato nulla.</p>
+      } @else {
+        <ul class="purchase-list">
+          @for (purchase of activePurchases(); track purchase.id) {
+            <li>
+              <a [routerLink]="['/purchases', purchase.id]" class="purchase-list__row">
+                <span class="ink-ledger">#{{ purchase.id }}</span>
+                <span class="ink-ledger">{{ purchase.purchaseDate | slice:0:10 }}</span>
+                <span class="ink-ledger">€ {{ purchase.paidPrice }}</span>
+                <span
+                  class="ink-status"
+                  [class.ink-status--paid]="purchase.status === 'PAID'"
+                  [class.ink-status--delivered]="purchase.status === 'DELIVERED'"
+                  [class.ink-status--completed]="purchase.status === 'COMPLETED'"
+                >{{ purchase.status }}</span>
+              </a>
+            </li>
+          }
+        </ul>
+      }
+    </section>
+
+    <button class="link-btn" (click)="logout()">Esci dall'account</button>
+  </div>
+}

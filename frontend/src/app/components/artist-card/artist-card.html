@@ -1,0 +1,19 @@
+<a class="artist-card" [routerLink]="['/artists', user.id]">
+  <div class="artist-card__media">
+    @if (previewImage && !imageFailed()) {
+      <img [src]="previewImage" alt="" (error)="imageFailed.set(true)">
+    } @else {
+      <span class="artist-card__initials">{{ initials }}</span>
+    }
+  </div>
+
+  <div class="artist-card__body">
+    <h3 class="artist-card__name">{{ user.name }} {{ user.surname }}</h3>
+    @if (user.bio) {
+      <p class="artist-card__bio">{{ user.bio }}</p>
+    }
+    <span class="ink-status" [class.ink-status--open]="openSlotsCount > 0">
+      {{ openSlotsCount > 0 ? openSlotsCount + ' slot disponibili' : 'nessuno slot libero' }}
+    </span>
+  </div>
+</a>

@@ -1,0 +1,28 @@
+.search-input {
+  width: 100%;
+  max-width: 360px;
+  display: block;
+  margin: 1.25rem 0 2rem;
+  padding: 0.7rem 1rem;
+  border-radius: 999px;
+  border: 1px solid var(--ink-border-strong);
+  background: var(--ink-surface);
+  color: var(--ink-text);
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+
+  &::placeholder {
+    color: var(--ink-text-muted);
+  }
+
+  &:focus {
+    outline: 2px solid var(--ink-action);
+    outline-offset: 1px;
+  }
+}
+
+.artist-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 1.25rem;
+}

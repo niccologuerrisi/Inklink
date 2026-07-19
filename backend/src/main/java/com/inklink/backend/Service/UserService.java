@@ -3,17 +3,20 @@ import com.inklink.backend.model.User;
 import com.inklink.backend.repository.UserRepository;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Service
 public class UserService
 {
     private final UserRepository repository;
     private final SlotService slotService;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository repository, SlotService slotService)
+    public UserService(UserRepository repository, SlotService slotService, PasswordEncoder passwordEncoder)
     {
         this.repository = repository;
         this.slotService = slotService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public User registerUser(User newUser)
@@ -28,6 +31,7 @@ public class UserService
         if (repository.existsByMail(newUser.getMail())) {
             throw new RuntimeException("Email già registrata");
         }
+        newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
         return repository.save(newUser);
     }
 
@@ -50,5 +54,10 @@ public class UserService
         if (!user.getSlots().isEmpty())
             throw new RuntimeException("Utente già attivo come artista");
         slotService.createDefaultSlots(user);
+    }
+
+    public User getUserByMail(String mail) {
+        return repository.findByMail(mail)
+                .orElseThrow(() -> new RuntimeException("Utente non trovato"));
     }
 }

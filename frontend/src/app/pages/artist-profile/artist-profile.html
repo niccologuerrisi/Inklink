@@ -1,0 +1,88 @@
+@if (loading()) {
+  <div class="ink-page"><p class="ink-eyebrow">Caricamento…</p></div>
+} @else if (!artist()) {
+  <div class="ink-page"><p class="ink-error">{{ errorMessage() || 'Artista non trovato.' }}</p></div>
+} @else {
+  <section class="artist-hero">
+    <svg class="artist-hero__blot" viewBox="0 0 200 190" aria-hidden="true">
+      <path
+        fill="var(--ink-accent-a)"
+        fill-opacity="0.35"
+        d="M96 8c24-4 47 9 60 29 13 21 13 45-1 64-15 20-39 30-63 28-23-2-45-15-54-37S30 46 47 29C60 16 79 11 96 8Z"
+      />
+    </svg>
+
+    <div class="ink-page artist-hero__content">
+      <div class="artist-hero__avatar">{{ artist()!.name[0] }}{{ artist()!.surname[0] }}</div>
+      <div>
+        <p class="ink-eyebrow">Profilo artista</p>
+        <h1>{{ artist()!.name }} {{ artist()!.surname }}</h1>
+        @if (artist()!.bio) {
+          <p class="artist-hero__bio">{{ artist()!.bio }}</p>
+        }
+      </div>
+    </div>
+  </section>
+
+  <div class="ink-page">
+    @if (errorMessage() && artist()) {
+      <p class="ink-error">{{ errorMessage() }}</p>
+    }
+
+    <section class="artist-section">
+      <h2>Slot disponibili</h2>
+
+      @if (isOwnProfile()) {
+        <p class="artist-section__hint">Questo è il tuo profilo pubblico: vai al tuo profilo per gestire gli slot.</p>
+      }
+
+      <div class="slots-grid">
+        @for (slot of artist()!.slots; track slot.id) {
+          <div class="ink-card slot">
+            <div class="slot__head">
+              <h3>{{ slot.title }}</h3>
+              <span class="ink-status" [class.ink-status--open]="isOpen(slot)" [class.ink-status--occupied]="!isOpen(slot)">
+                {{ isOpen(slot) ? 'libero' : 'occupato' }}
+              </span>
+            </div>
+            <p class="slot__price ink-ledger">€ {{ slot.price }}</p>
+
+            @if (!isOwnProfile()) {
+              <button
+                class="btn btn--primary btn--block"
+                [disabled]="!isOpen(slot) || buyingSlotId() === slot.id"
+                (click)="buySlot(slot)"
+              >
+                @if (buyingSlotId() === slot.id) {
+                  Acquisto in corso…
+                } @else if (isOpen(slot)) {
+                  Prenota questo slot
+                } @else {
+                  Non disponibile
+                }
+              </button>
+            }
+          </div>
+        }
+      </div>
+    </section>
+
+    <section class="artist-section">
+      <h2>Portfolio</h2>
+      @if ((artist()!.portfolioItems?.length ?? 0) === 0) {
+        <p class="artist-section__hint">Questo artista non ha ancora aggiunto opere al portfolio.</p>
+      } @else {
+        <div class="portfolio-grid">
+          @for (item of artist()!.portfolioItems; track item.id) {
+            <figure class="portfolio-grid__item">
+              <img [src]="item.fileURL" [alt]="item.title ?? 'Opera del portfolio'">
+              @if (item.title) {
+                <figcaption>{{ item.title }}</figcaption>
+              }
+            </figure>
+          }
+        </div>
+      }
+    </section>
+  </div>
+}

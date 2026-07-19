@@ -1,0 +1,82 @@
+<section class="hero">
+  <svg class="hero__blot hero__blot--a" viewBox="0 0 240 220" aria-hidden="true">
+    <path
+      fill="var(--ink-accent-b)"
+      fill-opacity="0.5"
+      d="M121 4c29-3 55 14 68 39 12 23 6 47-9 66-14 18-33 33-58 35-27 2-56-8-70-31C37 91 33 62 48 40 62 20 92 7 121 4Z"
+    />
+    <circle cx="204" cy="150" r="9" fill="var(--ink-accent-b)" fill-opacity="0.4" />
+    <circle cx="30" cy="170" r="5" fill="var(--ink-accent-b)" fill-opacity="0.35" />
+  </svg>
+  <svg class="hero__blot hero__blot--b" viewBox="0 0 200 190" aria-hidden="true">
+    <path
+      fill="var(--ink-accent-a)"
+      fill-opacity="0.45"
+      d="M96 8c24-4 47 9 60 29 13 21 13 45-1 64-15 20-39 30-63 28-23-2-45-15-54-37S30 46 47 29C60 16 79 11 96 8Z"
+    />
+    <circle cx="18" cy="40" r="6" fill="var(--ink-accent-a)" fill-opacity="0.35" />
+  </svg>
+
+  <div class="hero__content ink-page">
+    <p class="ink-eyebrow">Commissioni artistiche su misura</p>
+    <h1 class="hero__title">Commissioni d'arte,<br>un tratto alla volta.</h1>
+    <p class="hero__subtitle">
+      Inklink mette in contatto artisti indipendenti e persone con un'idea da realizzare:
+      scegli uno slot, mettiti d'accordo in chat, ricevi la tua opera.
+    </p>
+    <div class="hero__actions">
+      <a class="btn btn--primary" routerLink="/artists">Esplora gli artisti</a>
+      @if (!isLoggedIn()) {
+        <a class="btn btn--ghost" routerLink="/login">Registrati</a>
+      } @else {
+        <a class="btn btn--ghost" routerLink="/profile">Vai al tuo profilo</a>
+      }
+    </div>
+  </div>
+</section>
+
+<section class="ink-page featured">
+  <h2>In vetrina</h2>
+
+  @if (loading()) {
+    <p class="ink-eyebrow">Caricamento artisti…</p>
+  } @else if (featuredArtists().length === 0) {
+    <div class="ink-empty">
+      Nessun artista attivo al momento.
+      <a routerLink="/login">Registrati</a> e diventa il primo a pubblicare i tuoi slot.
+    </div>
+  } @else {
+    <div class="featured__grid">
+      @for (artist of featuredArtists(); track artist.id) {
+        <app-artist-card [user]="artist" />
+      }
+    </div>
+  }
+</section>
+
+<section class="ink-page how">
+  <h2>Come funziona</h2>
+  <ol class="how__steps">
+    <li>
+      <span class="how__number">01</span>
+      <div>
+        <h3>Scegli uno slot</h3>
+        <p>Ogni artista pubblica fino a tre slot con un prezzo: prenota quello libero che ti convince.</p>
+      </div>
+    </li>
+    <li>
+      <span class="how__number">02</span>
+      <div>
+        <h3>Mettetevi d'accordo</h3>
+        <p>Una chat dedicata si apre per l'acquisto: definite dettagli, riferimenti e tempi.</p>
+      </div>
+    </li>
+    <li>
+      <span class="how__number">03</span>
+      <div>
+        <h3>Ricevi l'opera</h3>
+        <p>L'artista consegna il lavoro, tu confermi e, se vuoi, lasci una recensione.</p>
+      </div>
+    </li>
+  </ol>
+</section>
