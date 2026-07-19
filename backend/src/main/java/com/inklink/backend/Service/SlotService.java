@@ -10,7 +10,6 @@ import java.util.List;
 public class SlotService
 {
     private final SlotRepository repository;
-
     public SlotService(SlotRepository repository) {this.repository = repository;}
 
     public void createDefaultSlots(User artist)
@@ -35,13 +34,17 @@ public class SlotService
 
     public List<Slot> getSlotsByArtistAndStatus(Long artistId, SlotStatus status) {return repository.findByArtistIdAndStatus(artistId, status);}
 
-    public void updatePrice(Long slotId, Double newPrice)
+    public void updatePrice(Long slotId, Double newPrice, User requester)
     {
         Slot slot = repository.findById(slotId)
                 .orElseThrow(() -> new RuntimeException("Slot non trovato"));
+
+        if (!slot.getArtist().getId().equals(requester.getId())) {
+            throw new RuntimeException("Non puoi modificare uno slot che non è tuo");
+        }
+
         slot.setPrice(newPrice);
         repository.save(slot); //serve a sincronizzare il cambiamento nel database(se
         // non si è dentro una transazione)
     }
-
 }

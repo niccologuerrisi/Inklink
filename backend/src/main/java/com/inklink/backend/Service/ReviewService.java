@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import com.inklink.backend.model.Purchase;
 import com.inklink.backend.model.PurchaseStatus;
 import com.inklink.backend.model.Review;
+import com.inklink.backend.model.User;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
@@ -20,11 +21,17 @@ public class ReviewService
     }
 
     @Transactional
-    public Review addReview(Long purchaseId, Integer rating, String comment) {
+    public Review addReview(Long purchaseId, Integer rating, String comment, User requester) {
         Purchase purchase = purchaseRepository.findById(purchaseId)
                 .orElseThrow(() -> new RuntimeException("Acquisto non trovato"));
+
+        if (!purchase.getBuyer().getId().equals(requester.getId())) {
+            throw new RuntimeException("Non puoi recensire un acquisto che non è tuo");
+        }
+
         if (purchase.getStatus() != PurchaseStatus.COMPLETED)
             throw new RuntimeException("Impossibile caricare la review: l'acquisto non è completato");
+
         Review review = new Review();
         review.setRating(rating);
         review.setComment(comment);

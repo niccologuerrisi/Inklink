@@ -1,4 +1,7 @@
 package com.inklink.backend.service;
+import com.inklink.backend.model.User;
+import com.inklink.backend.service.UserService;
+import org.springframework.security.core.context.SecurityContextHolder;
 import com.inklink.backend.model.Artwork;
 import com.inklink.backend.model.Purchase;
 import com.inklink.backend.model.PurchaseStatus;
@@ -20,12 +23,17 @@ public class ArtworkService
     }
 
     @Transactional
-    public Artwork uploadArtwork(Long purchaseId, String fileUrl)
-    {
+    public Artwork uploadArtwork(Long purchaseId, String fileUrl, User requester) {
         Purchase purchase = purchaseRepository.findById(purchaseId)
                 .orElseThrow(() -> new RuntimeException("Acquisto non trovato"));
+
+        if (!purchase.getSlot().getArtist().getId().equals(requester.getId())) {
+            throw new RuntimeException("Non puoi consegnare un lavoro che non è il tuo");
+        }
+
         if (purchase.getStatus() != PurchaseStatus.PAID)
             throw new RuntimeException("Impossibile caricare l'artwork: l'acquisto non è in stato PAID");
+
         Artwork artwork = new Artwork();
         artwork.setFileUrl(fileUrl);
         artwork.setPurchase(purchase);
