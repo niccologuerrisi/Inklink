@@ -9,11 +9,17 @@
 
     <header class="purchase__header">
       <div>
-        <p class="ink-eyebrow">Commissione #{{ purchase()!.id }}</p>
+        <p class="ink-eyebrow">Commissione</p>
         <h1>{{ slot()!.title }}</h1>
         <p class="purchase__meta ink-ledger">
           € {{ purchase()!.paidPrice }} · acquistata il {{ purchase()!.purchaseDate | slice:0:10 }}
         </p>
+        @if (counterpartName()) {
+          <p class="purchase__counterpart">
+            {{ isBuyer() ? 'Artista' : 'Cliente' }}:
+            <a [routerLink]="['/artists', counterpartId()]">{{ counterpartName() }}</a>
+          </p>
+        }
       </div>
       <a routerLink="/profile" class="btn btn--ghost btn--sm">← Torna al profilo</a>
     </header>

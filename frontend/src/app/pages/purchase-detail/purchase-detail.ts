@@ -7,6 +7,7 @@ import { SlotService } from '../../services/slot.service';
 import { MessageService } from '../../services/message.service';
 import { ArtworkService } from '../../services/artwork.service';
 import { ReviewService } from '../../services/review.service';
+import { UserService } from '../../services/user.service';
 import { AuthService } from '../../services/auth.service';
 import { Purchase, PurchaseStatus } from '../../models/purchase.model';
 import { Slot } from '../../models/slot.model';
@@ -26,6 +27,9 @@ export class PurchaseDetail implements OnInit {
   purchase = signal<Purchase | null>(null);
   slot = signal<Slot | null>(null);
   messages = signal<Message[]>([]);
+
+  counterpartName = signal<string | null>(null);
+  counterpartId = signal<number | null>(null);
 
   loading = signal(true);
   errorMessage = signal('');
@@ -59,6 +63,7 @@ export class PurchaseDetail implements OnInit {
     private messageService: MessageService,
     private artworkService: ArtworkService,
     private reviewService: ReviewService,
+    private userService: UserService,
     private authService: AuthService
   ) { }
 
@@ -78,6 +83,7 @@ export class PurchaseDetail implements OnInit {
           next: (slot) => {
             this.slot.set(slot);
             this.loading.set(false);
+            this.loadCounterpart(purchase, slot);
           },
           error: () => this.loading.set(false)
         });
@@ -91,6 +97,17 @@ export class PurchaseDetail implements OnInit {
     this.messageService.getMessageByPurchase(this.purchaseId).subscribe({
       next: (messages) => this.messages.set(messages),
       error: () => { /* la chat non è essenziale al caricamento della pagina */ }
+    });
+  }
+
+  private loadCounterpart(purchase: Purchase, slot: Slot): void {
+    const myId = this.currentUserId();
+    const counterpartId = myId === purchase.buyerId ? slot.artistId : purchase.buyerId;
+
+    this.counterpartId.set(counterpartId);
+    this.userService.getUserById(counterpartId).subscribe({
+      next: (user) => this.counterpartName.set(`${user.name} ${user.surname}`),
+      error: () => this.counterpartName.set(null)
     });
   }
 
