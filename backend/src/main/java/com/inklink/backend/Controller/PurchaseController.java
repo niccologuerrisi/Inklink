@@ -6,6 +6,7 @@ import com.inklink.backend.service.PurchaseService;
 import com.inklink.backend.service.UserService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.security.core.context.SecurityContextHolder;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/purchases")
@@ -31,4 +32,11 @@ public class PurchaseController {
 
     @GetMapping("/{id}")
     public Purchase getPurchase(@PathVariable Long id) {return service.getPurchaseById(id);}
+
+    @GetMapping("/as-artist")
+    public List<Purchase> getPurchasesAsArtist() {
+        String mail = SecurityContextHolder.getContext().getAuthentication().getName();
+        User requester = userService.getUserByMail(mail);
+        return service.getPurchasesForArtist(requester.getId());
+    }
 }

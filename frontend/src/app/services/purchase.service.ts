@@ -21,4 +21,8 @@ export class PurchaseService {
   getPurchase(id: number): Observable<Purchase>{
     return this.http.get<Purchase>(`${this.apiUrl}/${id}`);
   }
+
+  getPurchasesAsArtist(): Observable<Purchase[]> {
+    return this.http.get<Purchase[]>(`${this.apiUrl}/as-artist`);
+  }
 }

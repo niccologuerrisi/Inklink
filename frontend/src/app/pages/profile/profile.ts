@@ -7,9 +7,12 @@ import { MatInputModule } from '@angular/material/input';
 import { UserService } from '../../services/user.service';
 import { SlotService } from '../../services/slot.service';
 import { PortfolioItemService } from '../../services/portfolio-item.service';
+import { PurchaseService } from '../../services/purchase.service';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user.model';
 import { Slot } from '../../models/slot.model';
+import { Purchase } from '../../models/purchase.model';
+import { API_BASE_URL } from '../../config';
 
 @Component({
   selector: 'app-profile',
@@ -19,18 +22,26 @@ import { Slot } from '../../models/slot.model';
 })
 export class Profile implements OnInit {
 
+  readonly apiBaseUrl = API_BASE_URL;
+
   user = signal<User | null>(null);
   loading = signal(true);
   errorMessage = signal('');
 
   activating = signal(false);
 
-  // prezzo in fase di modifica per ciascuno slot: { [slotId]: valore }
   priceDrafts: Record<number, number> = {};
   savingSlotId = signal<number | null>(null);
 
-  newPortfolioItem = { fileURL: '', title: '', description: '' };
+  selectedFile: File | null = null;
+  selectedFilePreviewUrl = signal<string | null>(null);
+  newPortfolioTitle = '';
+  newPortfolioDescription = '';
   addingPortfolioItem = signal(false);
+
+  // commissioni ricevute come artista (diverse da "user.purchases", che sono
+  // gli acquisti fatti come cliente)
+  receivedPurchases = signal<Purchase[]>([]);
 
   isArtist = computed(() => (this.user()?.slots?.length ?? 0) > 0);
 
@@ -44,6 +55,7 @@ export class Profile implements OnInit {
     private userService: UserService,
     private slotService: SlotService,
     private portfolioItemService: PortfolioItemService,
+    private purchaseService: PurchaseService,
     private authService: AuthService,
     private router: Router
   ) { }
@@ -67,6 +79,16 @@ export class Profile implements OnInit {
           this.priceDrafts[slot.id] = slot.price;
         }
         this.loading.set(false);
+
+        // se è artista, carica anche le commissioni ricevute
+        if ((user.slots?.length ?? 0) > 0) {
+          this.purchaseService.getPurchasesAsArtist().subscribe({
+            next: (purchases) => this.receivedPurchases.set(
+              purchases.slice().sort((a, b) => b.id - a.id)
+            ),
+            error: () => { /* non blocca il resto della pagina */ }
+          });
+        }
       },
       error: () => {
         this.errorMessage.set('Non è stato possibile caricare il profilo.');
@@ -76,13 +98,12 @@ export class Profile implements OnInit {
   }
 
   becomeArtist(): void {
-    const id = this.user()?.id;
-    if (!id) return;
     this.activating.set(true);
-    this.userService.activateArtist(id).subscribe({
+    this.userService.activateArtist().subscribe({
       next: () => {
         this.activating.set(false);
-        this.loadUser(id);
+        const id = this.user()?.id;
+        if (id) this.loadUser(id);
       },
       error: () => {
         this.activating.set(false);
@@ -115,26 +136,39 @@ export class Profile implements OnInit {
     });
   }
 
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0] ?? null;
+    this.selectedFile = file;
+
+    if (this.selectedFilePreviewUrl()) {
+      URL.revokeObjectURL(this.selectedFilePreviewUrl()!);
+    }
+    this.selectedFilePreviewUrl.set(file ? URL.createObjectURL(file) : null);
+  }
+
   addPortfolioItem(): void {
     const id = this.user()?.id;
     if (!id) return;
 
-    if (!this.newPortfolioItem.fileURL.trim()) {
-      this.errorMessage.set("Inserisci l'URL di un'immagine per aggiungerla al portfolio.");
+    if (!this.selectedFile) {
+      this.errorMessage.set("Scegli un'immagine da aggiungere al portfolio.");
       return;
     }
 
     this.errorMessage.set('');
     this.addingPortfolioItem.set(true);
     this.portfolioItemService.addPortfolioItem(
-      id,
-      this.newPortfolioItem.fileURL.trim(),
-      this.newPortfolioItem.title.trim(),
-      this.newPortfolioItem.description.trim()
+      this.selectedFile,
+      this.newPortfolioTitle.trim(),
+      this.newPortfolioDescription.trim()
     ).subscribe({
       next: () => {
         this.addingPortfolioItem.set(false);
-        this.newPortfolioItem = { fileURL: '', title: '', description: '' };
+        this.selectedFile = null;
+        this.selectedFilePreviewUrl.set(null);
+        this.newPortfolioTitle = '';
+        this.newPortfolioDescription = '';
         this.loadUser(id);
       },
       error: () => {

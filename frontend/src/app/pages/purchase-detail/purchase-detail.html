@@ -35,8 +35,9 @@
           <h2>Consegna</h2>
 
           @if (purchase()!.artwork) {
-            <a class="artwork-link" [href]="purchase()!.artwork!.fileUrl" target="_blank" rel="noopener">
-              Apri il file consegnato ↗
+            <img class="artwork-preview" [src]="apiBaseUrl + purchase()!.artwork!.fileUrl" alt="Opera consegnata">
+            <a class="artwork-link" [href]="apiBaseUrl + purchase()!.artwork!.fileUrl" target="_blank" rel="noopener">
+              Apri il file a piena dimensione ↗
             </a>
             <p class="purchase__hint">
               Caricato il {{ purchase()!.artwork!.uploadDate | slice:0:10 }}
@@ -48,13 +49,11 @@
           @if (isArtist() && purchase()!.status === PurchaseStatus.PAID) {
             <form class="artwork-form" (ngSubmit)="uploadArtwork()">
               <input
-                type="text"
-                placeholder="URL del file da consegnare"
-                [(ngModel)]="newArtworkUrl"
-                name="artworkUrl"
-                required
+                type="file"
+                accept="image/png,image/jpeg,image/webp,image/gif"
+                (change)="onArtworkFileSelected($event)"
               >
-              <button class="btn btn--primary" type="submit" [disabled]="uploadingArtwork() || !newArtworkUrl.trim()">
+              <button class="btn btn--primary" type="submit" [disabled]="uploadingArtwork() || !selectedArtworkFile">
                 {{ uploadingArtwork() ? 'Carico…' : 'Consegna il lavoro' }}
               </button>
             </form>

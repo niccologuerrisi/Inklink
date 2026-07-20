@@ -11,6 +11,7 @@ import { AuthService } from '../../services/auth.service';
 import { Purchase, PurchaseStatus } from '../../models/purchase.model';
 import { Slot } from '../../models/slot.model';
 import { Message } from '../../models/message.model';
+import { API_BASE_URL } from '../../config';
 
 @Component({
   selector: 'app-purchase-detail',
@@ -19,6 +20,8 @@ import { Message } from '../../models/message.model';
   styleUrl: './purchase-detail.scss',
 })
 export class PurchaseDetail implements OnInit {
+
+  readonly apiBaseUrl = API_BASE_URL;
 
   purchase = signal<Purchase | null>(null);
   slot = signal<Slot | null>(null);
@@ -30,7 +33,7 @@ export class PurchaseDetail implements OnInit {
   newMessageText = '';
   sendingMessage = signal(false);
 
-  newArtworkUrl = '';
+  selectedArtworkFile: File | null = null;
   uploadingArtwork = signal(false);
 
   completing = signal(false);
@@ -115,18 +118,23 @@ export class PurchaseDetail implements OnInit {
     });
   }
 
+  onArtworkFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    this.selectedArtworkFile = input.files?.[0] ?? null;
+  }
+
   uploadArtwork(): void {
-    if (!this.newArtworkUrl.trim()) {
-      this.errorMessage.set("Inserisci l'URL del file da consegnare.");
+    if (!this.selectedArtworkFile) {
+      this.errorMessage.set('Scegli il file da consegnare.');
       return;
     }
 
     this.errorMessage.set('');
     this.uploadingArtwork.set(true);
-    this.artworkService.uploadArtwork(this.purchaseId, this.newArtworkUrl.trim()).subscribe({
+    this.artworkService.uploadArtwork(this.purchaseId, this.selectedArtworkFile).subscribe({
       next: () => {
         this.uploadingArtwork.set(false);
-        this.newArtworkUrl = '';
+        this.selectedArtworkFile = null;
         this.loadAll();
       },
       error: () => {

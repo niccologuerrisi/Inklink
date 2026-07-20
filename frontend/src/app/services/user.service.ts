@@ -22,7 +22,7 @@ export class UserService {
     return this.http.get<User>(`${this.apiUrl}/${id}`);
   }
 
-  activateArtist(id: number): Observable<void> {
-    return this.http.post<void>(`${this.apiUrl}/${id}/activate-artist`, {});
+  activateArtist(): Observable<void> {
+    return this.http.post<void>(`${this.apiUrl}/activate-artist`, {});
   }
 }

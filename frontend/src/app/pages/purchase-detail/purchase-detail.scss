@@ -63,6 +63,16 @@
   margin-bottom: 0.25rem;
 }
 
+.artwork-preview {
+  display: block;
+  max-width: 100%;
+  max-height: 320px;
+  border-radius: var(--ink-radius-sm);
+  border: 1px solid var(--ink-border);
+  margin-bottom: 0.6rem;
+  object-fit: contain;
+}
+
 .artwork-form {
   display: flex;
   gap: 0.6rem;
