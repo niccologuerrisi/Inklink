@@ -2,6 +2,7 @@ import { Component, Input, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { User } from '../../models/user.model';
 import { SlotStatus } from '../../models/slot.model';
+import { API_BASE_URL } from '../../config';
 
 @Component({
   selector: 'app-artist-card',
@@ -21,7 +22,7 @@ export class ArtistCard {
 
   get previewImage(): string | null {
     const first = this.user.portfolioItems?.[0];
-    return first?.fileURL ?? null;
+    return first?.fileURL ? API_BASE_URL + first.fileURL : null;
   }
 
   get openSlotsCount(): number {

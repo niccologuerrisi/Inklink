@@ -79,7 +79,7 @@
           <div class="portfolio-grid">
             @for (item of user()!.portfolioItems; track item.id) {
               <figure class="portfolio-grid__item">
-                <img [src]="item.fileURL" [alt]="item.title ?? 'Opera del portfolio'">
+                <img [src]="apiBaseUrl + item.fileURL" [alt]="item.title ?? 'Opera del portfolio'">
                 @if (item.title) {
                   <figcaption>{{ item.title }}</figcaption>
                 }
@@ -89,22 +89,49 @@
         }
 
         <form class="portfolio-form" (ngSubmit)="addPortfolioItem()">
-          <mat-form-field appearance="outline">
-            <mat-label>URL dell'immagine</mat-label>
-            <input matInput [(ngModel)]="newPortfolioItem.fileURL" name="fileURL" required>
-          </mat-form-field>
+          <label class="file-picker">
+            <span class="file-picker__label">Immagine dell'opera</span>
+            <input type="file" accept="image/png,image/jpeg,image/webp,image/gif" (change)="onFileSelected($event)">
+          </label>
+
+          @if (selectedFilePreviewUrl()) {
+            <img class="file-picker__preview" [src]="selectedFilePreviewUrl()" alt="Anteprima">
+          }
+
           <mat-form-field appearance="outline">
             <mat-label>Titolo (facoltativo)</mat-label>
-            <input matInput [(ngModel)]="newPortfolioItem.title" name="title">
+            <input matInput [(ngModel)]="newPortfolioTitle" name="title">
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Descrizione (facoltativa)</mat-label>
-            <input matInput [(ngModel)]="newPortfolioItem.description" name="description">
+            <input matInput [(ngModel)]="newPortfolioDescription" name="description">
           </mat-form-field>
-          <button class="btn btn--ghost" type="submit" [disabled]="addingPortfolioItem() || !newPortfolioItem.fileURL">
-            {{ addingPortfolioItem() ? 'Aggiungo…' : 'Aggiungi al portfolio' }}
+          <button class="btn btn--ghost" type="submit" [disabled]="addingPortfolioItem() || !selectedFile">
+            {{ addingPortfolioItem() ? 'Carico…' : 'Aggiungi al portfolio' }}
           </button>
         </form>
+        <h2 class="profile__portfolio-title">Commissioni ricevute</h2>
+        @if (receivedPurchases().length === 0) {
+          <p class="profile__muted">Non hai ancora ricevuto nessuna commissione.</p>
+        } @else {
+          <ul class="purchase-list">
+            @for (purchase of receivedPurchases(); track purchase.id) {
+              <li>
+                <a [routerLink]="['/purchases', purchase.id]" class="purchase-list__row">
+                  <span class="ink-ledger">#{{ purchase.id }}</span>
+                  <span class="ink-ledger">{{ purchase.purchaseDate | slice:0:10 }}</span>
+                  <span class="ink-ledger">€ {{ purchase.paidPrice }}</span>
+                  <span
+                    class="ink-status"
+                    [class.ink-status--paid]="purchase.status === 'PAID'"
+                    [class.ink-status--delivered]="purchase.status === 'DELIVERED'"
+                    [class.ink-status--completed]="purchase.status === 'COMPLETED'"
+                  >{{ purchase.status }}</span>
+                </a>
+              </li>
+            }
+          </ul>
+        }
       }
     </section>
 

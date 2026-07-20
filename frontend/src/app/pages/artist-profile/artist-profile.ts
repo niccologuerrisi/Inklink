@@ -5,6 +5,7 @@ import { PurchaseService } from '../../services/purchase.service';
 import { AuthService } from '../../services/auth.service';
 import { User } from '../../models/user.model';
 import { Slot, SlotStatus } from '../../models/slot.model';
+import { API_BASE_URL } from '../../config';
 
 @Component({
   selector: 'app-artist-profile',
@@ -13,6 +14,8 @@ import { Slot, SlotStatus } from '../../models/slot.model';
   styleUrl: './artist-profile.scss',
 })
 export class ArtistProfile implements OnInit {
+
+  readonly apiBaseUrl = API_BASE_URL;
 
   artist = signal<User | null>(null);
   loading = signal(true);

@@ -75,7 +75,7 @@
         <div class="portfolio-grid">
           @for (item of artist()!.portfolioItems; track item.id) {
             <figure class="portfolio-grid__item">
-              <img [src]="item.fileURL" [alt]="item.title ?? 'Opera del portfolio'">
+              <img [src]="apiBaseUrl + item.fileURL" [alt]="item.title ?? 'Opera del portfolio'">
               @if (item.title) {
                 <figcaption>{{ item.title }}</figcaption>
               }

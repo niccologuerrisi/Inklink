@@ -8,6 +8,7 @@ import com.inklink.backend.model.Slot;
 import com.inklink.backend.model.SlotStatus;
 import com.inklink.backend.model.User;
 import com.inklink.backend.model.PurchaseStatus;
+import java.util.List;
 
 @Service
 public class PurchaseService
@@ -61,5 +62,9 @@ public class PurchaseService
     public Purchase getPurchaseById(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Acquisto non trovato"));
+    }
+
+    public List<Purchase> getPurchasesForArtist(Long artistId) {
+        return repository.findBySlot_ArtistId(artistId);
     }
 }

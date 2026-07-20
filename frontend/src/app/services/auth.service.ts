@@ -23,6 +23,8 @@ export class AuthService {
     return stored ? Number(stored) : null;
   }
 
+  // chiama il vero endpoint di login del backend (email + password),
+  // e se le credenziali sono corrette salva il token JWT ricevuto
   login(mail: string, password: string): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${this.apiUrl}/login`, { mail, password }).pipe(
       tap(response => this.setSession(response))
