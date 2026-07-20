@@ -65,6 +65,6 @@ public class PurchaseService
     }
 
     public List<Purchase> getPurchasesForArtist(Long artistId) {
-        return repository.findBySlot_ArtistId(artistId);
+        return repository.findBySlot_Artist_Id(artistId);
     }
 }

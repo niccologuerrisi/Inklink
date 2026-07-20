@@ -11,6 +11,15 @@
   font-size: 0.85rem;
 }
 
+.purchase__counterpart {
+  font-size: 0.88rem;
+  margin-top: 0.35rem;
+
+  a {
+    font-weight: 700;
+  }
+}
+
 .purchase__hint {
   color: var(--ink-text-muted);
   font-size: 0.88rem;

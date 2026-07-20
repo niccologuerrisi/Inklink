@@ -118,7 +118,6 @@
             @for (purchase of receivedPurchases(); track purchase.id) {
               <li>
                 <a [routerLink]="['/purchases', purchase.id]" class="purchase-list__row">
-                  <span class="ink-ledger">#{{ purchase.id }}</span>
                   <span class="ink-ledger">{{ purchase.purchaseDate | slice:0:10 }}</span>
                   <span class="ink-ledger">€ {{ purchase.paidPrice }}</span>
                   <span
@@ -145,7 +144,6 @@
           @for (purchase of activePurchases(); track purchase.id) {
             <li>
               <a [routerLink]="['/purchases', purchase.id]" class="purchase-list__row">
-                <span class="ink-ledger">#{{ purchase.id }}</span>
                 <span class="ink-ledger">{{ purchase.purchaseDate | slice:0:10 }}</span>
                 <span class="ink-ledger">€ {{ purchase.paidPrice }}</span>
                 <span
